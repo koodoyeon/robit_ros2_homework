@@ -1,8 +1,0 @@
-[01m[K/home/dy/ros2_ws/src/my_package/src/my_node.cpp:[m[K In member function ‘[01m[Kvoid TurtleControlNode::processKeyInput()[m[K’:
-[01m[K/home/dy/ros2_ws/src/my_package/src/my_node.cpp:47:13:[m[K [01;31m[Kerror: [m[K‘[01m[Kgetch[m[K’ was not declared in this scope; did you mean ‘[01m[Kgetc[m[K’?
-   47 |             [01;31m[Kgetch[m[K(); // '[' 문자 읽기
-      |             [01;31m[K^~~~~[m[K
-      |             [32m[Kgetc[m[K
-gmake[2]: *** [CMakeFiles/my_node.dir/build.make:76: CMakeFiles/my_node.dir/src/my_node.cpp.o] Error 1
-gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/my_node.dir/all] Error 2
-gmake: *** [Makefile:146: all] Error 2
