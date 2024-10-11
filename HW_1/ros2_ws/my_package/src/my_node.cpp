@@ -6,40 +6,40 @@
 #include <iostream> 
 #include <cmath> 
 
-using namespace std::chrono_literals; // 시간 단위 사용을 위한 네임스페이스
+using namespace std::chrono_literals; 
 
-// 거북이를 조종하는 노드 클래스 정의
+
 class TurtleTeleop : public rclcpp::Node {
 public:
     TurtleTeleop() : Node("my_node") { 노드 이름 설정
     
-        // 퍼블리셔 생성: 'turtle1/cmd_vel' 토픽으로 속도 메시지 전송
+        
         pub_ = this->create_publisher<geometry_msgs::msg::Twist>("turtle1/cmd_vel", 10);
         client_ = this->create_client<turtlesim::srv::TeleportAbsolute>("turtle1/teleport_absolute");
 
-        // 100ms 주기로 키 입력을 처리하는 타이머 설정
+       
         timer_ = this->create_wall_timer(100ms, std::bind(&TurtleTeleop::keyLoop, this));
         RCLCPP_INFO(this->get_logger(), "Use arrow keys to control turtle, 'c' for circle, 'q' to quit, 'r' to reset, 's' for square, 't' for triangle.");
     }
 
 private:
-    rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr pub_; // 퍼블리셔 포인터
-    rclcpp::Client<turtlesim::srv::TeleportAbsolute>::SharedPtr client_; // 클라이언트 포인터
-    rclcpp::TimerBase::SharedPtr timer_; // 타이머 포인터
+    rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr pub_; 
+    rclcpp::Client<turtlesim::srv::TeleportAbsolute>::SharedPtr client_; 
+    rclcpp::TimerBase::SharedPtr timer_; 
 
     
     int getch() {
-        struct termios oldt, newt; // 터미널 설정을 위한 구조체
+        struct termios oldt, newt; 
         int ch; 
 
-        // 현재 터미널 속성 저장
+        
         tcgetattr(STDIN_FILENO, &oldt);
         newt = oldt; 
         newt.c_lflag &= ~(ICANON | ECHO); 
         tcsetattr(STDIN_FILENO, TCSANOW, &newt); 
-        ch = getchar(); // 문자 입력 받기
+        ch = getchar(); 
         tcsetattr(STDIN_FILENO, TCSANOW, &oldt); 
-        return ch; // 읽은 문자 반환
+        return ch; 
     }
 
     void key() {
@@ -65,10 +65,10 @@ private:
                     twist.angular.z = 1.0;
                     break;
                 default:
-                    break; // 예외 처리
+                    break; 
             }
         } else {
-            // 특수 키 처리
+            
             switch (c) {
                 case 'q': // 종료 키
                     rclcpp::shutdown(); 
@@ -76,14 +76,14 @@ private:
                 case 'r': 
                     teleportToCenter(); // 중앙으로 이동 
                     break;
-                case 's': // 사각형 그리기
-                    drawSquare(); // 사각형 
+                case 's': // 사각형
+                    drawSquare();  
                     break;
-                case 'c': // 원 그리기
-                    drawCircle(); // 원 
+                case 'c': // 원 
+                    drawCircle(); 
                     break;
-                case 't': // 삼각형 그리기
-                    drawTriangle(); // 삼각형 
+                case 't': // 삼각형 
+                    drawTriangle(); 
                     break;
                 default:
                     break; 
@@ -94,7 +94,7 @@ private:
         pub_->publish(twist);
     }
 
-    // 거북이를 중앙으로 이동
+    // 거북이 중앙으로 이동
     void teleportToCenter() {
         auto request = std::make_shared<turtlesim::srv::TeleportAbsolute::Request>(); 
         request->x = 5.5; // 중앙 x좌표
@@ -114,7 +114,7 @@ private:
         RCLCPP_INFO(this->get_logger(), "Turtle reset to center."); 
     }
 
-    // 사각형 그리기 함수
+    // 사각형 
     void drawSquare() {
         geometry_msgs::msg::Twist twist; 
         for (int i = 0; i < 4; i++) { 
@@ -130,14 +130,14 @@ private:
         }
     }
 
-    // 원 그리기 함수 
+    // 원 
     void drawCircle() {
         geometry_msgs::msg::Twist twist; 
         twist.linear.x = 3.0;  // 원 그리기 속도
         twist.angular.z = 3.0;  // 회전 속도
         
         // 원 그리기 
-        for (int i = 0; i < 20; ++i) { // 반복 횟수를 통해 원 그리기.
+        for (int i = 0; i < 20; ++i) { 
             pub_->publish(twist); 
             rclcpp::sleep_for(100ms); 
         }
@@ -165,12 +165,12 @@ private:
     }
 };
 
-// 메인 함수
+
 int main(int argc, char **argv) {
-    rclcpp::init(argc, argv); // ROS2 초기화
-    auto node = std::make_shared<TurtleTeleop>(); // 노드 생성
-    rclcpp::spin(node); // 노드 실행
-    rclcpp::shutdown(); // 종료
-    return 0; // 프로그램 종료
+    rclcpp::init(argc, argv); 
+    auto node = std::make_shared<TurtleTeleop>(); 
+    rclcpp::spin(node); 
+    rclcpp::shutdown(); 
+    return 0; 
 }
 
