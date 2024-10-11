@@ -1,0 +1,10 @@
+[0.008s] Invoking command in '/home/dy/ros2_ws/build/my_package': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/dy/ros2_ws/build/my_package -- -j16 -l16
+[0.055s] [ 50%] [32mBuilding CXX object CMakeFiles/my_node.dir/src/my_node.cpp.o[0m
+[0.172s] [01m[K/home/dy/ros2_ws/src/my_package/src/my_node.cpp:3:10:[m[K [01;31m[Kfatal error: [m[Kturtlesim/srv/teleport_absolute.hpp: No such file or directory
+[0.172s]     3 | #include [01;31m[K<turtlesim/srv/teleport_absolute.hpp>[m[K
+[0.172s]       |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[0.172s] compilation terminated.
+[0.175s] gmake[2]: *** [CMakeFiles/my_node.dir/build.make:76: CMakeFiles/my_node.dir/src/my_node.cpp.o] Error 1
+[0.175s] gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/my_node.dir/all] Error 2
+[0.175s] gmake: *** [Makefile:146: all] Error 2
+[0.178s] Invoked command in '/home/dy/ros2_ws/build/my_package' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/dy/ros2_ws/build/my_package -- -j16 -l16
