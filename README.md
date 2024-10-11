@@ -45,7 +45,7 @@ ros2 run turtlesim turtlesim_node //특정 노드를 실행하는 명령어로 t
 
 ```
 ```
-ros2 run my_package my_nod //특정 노드 실행, 제작한 노드 실행.
+ros2 run my_package my_node //특정 노드 실행, 제작한 노드 실행.
 ```
 
 `ros2 run`  : 노드를 실행할 때 사용하는 명령어. 
